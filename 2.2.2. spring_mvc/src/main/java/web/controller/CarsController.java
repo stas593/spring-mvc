@@ -18,12 +18,4 @@ public class CarsController {
         model.addAttribute("cars", count != null ? carService.getCars(count) : carService.getAllCars());
         return "cars";
     }
-
-//    @RequestMapping(value = "/cars")
-//    public String geAlltCars(Model model){
-//        model.addAttribute("cars", carService.getAllCars());
-//        return "cars";
-//    }
-
-
 }
