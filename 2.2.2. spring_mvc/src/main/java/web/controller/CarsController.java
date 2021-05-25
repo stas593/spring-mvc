@@ -3,8 +3,7 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import web.service.CarService;
 import web.service.CarServiceImpl;
 
@@ -14,17 +13,17 @@ public class CarsController {
     @Autowired
     CarService carService;
 
-    @GetMapping(value = "/cars?count={id}")
-    public String getCars(@RequestParam(name = "count") int count, Model model){
-        model.addAttribute("cars", carService.getCars(count));
+    @RequestMapping(value = "/cars")
+    public String getCars(@RequestParam(name = "count" , required=false) Integer count, Model model){
+        model.addAttribute("cars", count != null ? carService.getCars(count) : carService.getAllCars());
         return "cars";
     }
 
-    @GetMapping(value = "/cars")
-    public String geAlltCars(Model model){
-        model.addAttribute("cars", carService.getAllCars());
-        return "cars";
-    }
+//    @RequestMapping(value = "/cars")
+//    public String geAlltCars(Model model){
+//        model.addAttribute("cars", carService.getAllCars());
+//        return "cars";
+//    }
 
 
 }
